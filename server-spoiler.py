@@ -9,7 +9,7 @@ Nmap scan => Spoilers everywhere.
 
 """
 
-import socket
+import SocketServer
 import json
 import random
 import logging
@@ -20,29 +20,28 @@ PORT = 8080
 FILE_SPOILER = "spoilers.json"
 MAX_SPOILER_COUNT = 4200
 
-logging.basicConfig(filename='server.log', format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
 
-fileSpoilers = open(FILE_SPOILER, "r")
-spoilers = json.load(fileSpoilers)
-movies = spoilers['movies']
-fileSpoilers.close()
+class MyTCPHandler(SocketServer.BaseRequestHandler):
 
-if __name__ == "__main__":
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((HOST, PORT))
-    s.listen(3)
-    print "Ready for ACTION"
-
-    # Main Loop, listen for a connection ... and spoiler!
-    while 1:
+    def handle(self):
+        logging.info('Connected with ' + str(self.client_address))
 
         # Random spoiler select
         chosen = random.choice(movies)
         spoiler_chosen = chosen['name'] + '\n' + ' '.join([x['value'] for x in chosen['spoilers']]) + '\n'
 
-        conn, addr = s.accept()
-        logging.info('Connected with ' + str(addr))
+        self.request.sendall(spoiler_chosen.encode('ascii','ignore'))
+        self.request.close()
 
-        conn.sendall(spoiler_chosen.encode('ascii','ignore'))
-        conn.close()
+if __name__ == "__main__":
+
+    logging.basicConfig(filename='server.log', format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
+
+    fileSpoilers = open(FILE_SPOILER, "r")
+    spoilers = json.load(fileSpoilers)
+    movies = spoilers['movies']
+    fileSpoilers.close()
+
+    server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+    print "Ready for ACTION"
+    server.serve_forever()
