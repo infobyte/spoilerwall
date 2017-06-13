@@ -36,6 +36,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 if __name__ == "__main__":
 
     logging.basicConfig(filename='server.log', format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
+    logging.getLogger().addHandler(logging.StreamHandler())
 
     fileSpoilers = open(FILE_SPOILER, "r")
     spoilers = json.load(fileSpoilers)
@@ -43,5 +44,5 @@ if __name__ == "__main__":
     fileSpoilers.close()
 
     server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
-    print "Ready for ACTION"
+    logging.info("Ready for ACTION")
     server.serve_forever()
