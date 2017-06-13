@@ -12,12 +12,15 @@ Nmap scan => Spoilers everywhere.
 import socket
 import json
 import random
+import logging
 
 HOST = "127.0.0.1"
 PORT = 8080
 
 FILE_SPOILER = "spoilers.json"
 MAX_SPOILER_COUNT = 4200
+
+logging.basicConfig(filename='server.log', format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
 
 fileSpoilers = open(FILE_SPOILER, "r")
 spoilers = json.load(fileSpoilers)
@@ -39,7 +42,7 @@ if __name__ == "__main__":
         spoiler_chosen = chosen['name'] + '\n' + ' '.join([x['value'] for x in chosen['spoilers']]) + '\n'
 
         conn, addr = s.accept()
-        print 'Connected with', addr
+        logging.info('Connected with ' + str(addr))
 
         conn.sendall(spoiler_chosen.encode('ascii','ignore'))
         conn.close()
