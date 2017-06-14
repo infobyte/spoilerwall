@@ -5,6 +5,9 @@ This service listen in a port and send to the client a SPOILER!!! :P
 Use that IPTABLE rule for redirect all traffic incoming from all ports to this service.
 iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 1:65535 -j DNAT --to-destination HOST:PORT
 
+If you redirect to localhost, you need that:
+sysctl -w net.ipv4.conf.eth0.route_localnet=1
+
 Nmap scan => Spoilers everywhere.
 
 """
