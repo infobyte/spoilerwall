@@ -22,8 +22,21 @@ $ git clone git@github.com:infobyte/spoilerwall.git
 $ python2 server-spoiler.py
 ```
 
+The server will listen on the selected port (8080 by default). Redirect incoming TCP traffic in all ports to this service by running:
 
-View the live demo running in spoilerwall.faradaysec.com
+```
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 1:65535 -j DNAT --to-destination {HOST}:{PORT}
+```
+
+Change **{HOST}** and **{PORT}** for the values set in step (2). Also, if the traffic is redirected to localhost, run:
+
+```
+sysctl -w net.ipv4.conf.eth0.route_localnet=1
+```
+
+Using this config, an nmap scan will show every port as open and a spoiler for each one.
+
+View the live demo running in [spoilerwall.faradaysec.com](spoilerwall.faradaysec.com)
 
 ```
 ~ ❯❯❯ telnet spoilerwall.faradaysec.com 23
