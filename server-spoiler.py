@@ -12,7 +12,9 @@ Nmap scan => Spoilers everywhere.
 
 """
 
-import SocketServer
+# If you use python3, uncomment that.
+#import socketserver as server
+import SocketServer as server
 import json
 import random
 import logging
@@ -24,7 +26,7 @@ FILE_SPOILER = "spoilers.json"
 MAX_SPOILER_COUNT = 4200
 
 
-class MyTCPHandler(SocketServer.BaseRequestHandler):
+class MyTCPHandler(server.BaseRequestHandler):
 
     def handle(self):
         logging.info('Connected with ' + str(self.client_address))
@@ -46,6 +48,6 @@ if __name__ == "__main__":
     movies = spoilers['movies']
     fileSpoilers.close()
 
-    server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+    server = server.TCPServer((HOST, PORT), MyTCPHandler)
     logging.info("Ready for ACTION")
     server.serve_forever()
