@@ -60,3 +60,5 @@ https://www.shodan.io/host/138.197.196.144
 
 Be careful in your next CTF - you never know when the spoilers are coming!
 
+Spoilers from **SpoilMe**: https://spoilme.io 
+Thanks **SpoilMe**!
