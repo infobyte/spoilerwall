@@ -12,9 +12,10 @@ Nmap scan => Spoilers everywhere.
 
 """
 
-# If you use python3, uncomment that.
-#import socketserver as server
-import SocketServer as server
+try:
+    import socketserver as server
+except ImportError:
+    import SocketServer as server
 import json
 import random
 import logging
