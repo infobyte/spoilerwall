@@ -36,7 +36,7 @@ sysctl -w net.ipv4.conf.eth0.route_localnet=1
 
 Using this config, an nmap scan will show every port as open and a spoiler for each one.
 
-View the live demo running in [spoilerwall.faradaysec.com](spoilerwall.faradaysec.com)
+View the live demo running in [spoilerwall.faradaysec.com](http://spoilerwall.faradaysec.com)
 
 ```
 ~ ❯❯❯ telnet spoilerwall.faradaysec.com 23
