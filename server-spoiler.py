@@ -26,6 +26,9 @@ PORT = 8080
 FILE_SPOILER = "spoilers.json"
 MAX_SPOILER_COUNT = 4200
 
+SPOILER_COLOR = '\033[92m'
+ASCII_NO_COLOR = '\033[0m'
+
 
 class MyTCPHandler(server.BaseRequestHandler):
 
@@ -36,7 +39,7 @@ class MyTCPHandler(server.BaseRequestHandler):
         chosen = random.choice(movies)
         spoiler_chosen = chosen['name'] + '\n' + ' '.join([x['value'] for x in chosen['spoilers']]) + '\n'
 
-        self.request.sendall(spoiler_chosen.encode('ascii','ignore'))
+        self.request.sendall(SPOILER_COLOR + spoiler_chosen.encode('ascii','ignore') + ASCII_NO_COLOR)
         self.request.close()
 
 if __name__ == "__main__":
