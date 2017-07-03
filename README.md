@@ -16,7 +16,9 @@ $ git clone git@github.com:infobyte/spoilerwall.git
 
 2. Edit the file `server-spoiler.py` and set the **HOST** and **PORT** variables.
 
-3. Run the server
+3. Change spoiler color (or not?), default green
+
+4. Run the server
 
 ```
 $ python2 server-spoiler.py
