@@ -1,3 +1,6 @@
+<p align="center" >
+  <a href="https://www.faradaysec.com" target="_blank"><img src="https://1.bp.blogspot.com/-DHDtcxnAujs/Xp5TEcdoeeI/AAAAAAAASZQ/fbSKCoPnFjUwhbPN0bUQyIpSWnPKRMhZACNcBGAsYHQ/s1600/ad_kitploitadv6.png"></a>
+</p>
 # Beware! Spoilers ahead!
 
 Spoilerwall introduces a brand new concept in the field of network hardening. Avoid being scanned by spoiling movies on all your ports!
